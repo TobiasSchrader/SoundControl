@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery-latest.js"></script>
+    <script src="data.js"></script>
+    <script src="bwk1.js"></script>
+    <script src="buffer-loader.js"></script>
+  </head>
+  <body>
+    <h1>Sound-Control</h1>
+    <p>
+      Master-Volume: <input type="range" min="0" max="100" value="50"
+			    oninput="changeVolume(this);" />
+    </p>
+    <hr/>
+    <p id="g0">
+    </p>
+    <p>
+	 <button type="button" id="stop">Stop</button> 
+	 <button type="button" id="fadeout">Fade-Out</button> 
+    </p>
+	<p id="info">
+    </p>
+  </body>
+</html>

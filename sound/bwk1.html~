@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <script src="jquery-latest.js"></script>
+  <script>
+$(document).ready(setup);
+
+let context;
+
+function setup() {
+//  document.querySelector('#pause').addEventListener('click', play_next);
+  window.AudioContext = window.AudioContext||window.webkitAudioContext;
+  context = new AudioContext();
+  build(musik);
+}
+ 
+function build(gruppe) {
+  $( ".groups" ).append( "Guten Tag");
+}
+
+function play_next() {
+  console.log("Funktion: "+name);
+}
+  </script>
+  <script src="data.js"></script>
+  <script src="init.js"></script>
+  <script src="volume-sample.js"></script>
+  <script src="buffer-loader.js"></script>
+ </head>
+ <body>
+ <h1>Sound-Control</h1>
+  <p>
+   Master-Volume: <input type="range" min="0" max="100" value="50"
+			 oninput="VolumeSample.changeVolume(this);" />
+  </p>
+  <hr/>
+  <p class="groups">
+  </p>
+ </body>
+</html>

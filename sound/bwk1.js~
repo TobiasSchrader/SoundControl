@@ -1,0 +1,32 @@
+$(document).ready(setup);
+
+let context;
+
+let group_no=1;
+let button_no=1;
+    
+function setup() {
+    window.AudioContext = window.AudioContext||window.webkitAudioContext;
+    context = new AudioContext();
+    build("g0", musik);
+}
+ 
+function build(classname, gruppe) {
+    let this_group;
+    if (  gruppe.subs != undefined ) {
+        this_group="g"+group_no++;
+        $( "#"+classname ).append( `<ul id="${this_group}">` );
+        for ( let sub of gruppe.subs ) {
+            let button_id="b"+button_no++;
+            $( `#${this_group}` )
+		.append(`<li><button type="button" id="${button_id}">${sub.name}</button></li>` );
+            document.getElementById( button_id ).addEventListener(
+		'click', function() { console.log( button_id ); } );
+            build( this_group, sub );
+        }
+    }
+}
+
+function play_next() {
+    console.log("Funktion: "+name);
+}
