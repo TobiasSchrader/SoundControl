@@ -1,7 +1,0 @@
-let musik = {
-    "Pause": {},
-    "Kurze Ecke": {},
-    "Tor"  : {
-	"Tor Jambo": {},
-    },
-};
