@@ -16,6 +16,12 @@ let sound_info = {
 	  songs: [ { title: "Nothing compares to you", src: "sounds/nothing.wav" },
 		   { title: "abc", src: "sounds/abc.wav" },
 		 ]
+	},
+	{ name: "Test1",
+	  songs: []
+	},
+	{ name: "Test2",
+	  jingle: true
 	}
     ]
 };

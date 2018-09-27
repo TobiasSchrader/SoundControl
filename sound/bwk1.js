@@ -63,11 +63,16 @@ function build(group_name, group) {
         let this_group="g"+group_no++;
         $( "#"+group_name ).append( `<ul id="${this_group}">` );
         for ( let sub of group.subs ) {
-            let button_id="b"+button_no++;
-            $( `#${this_group}` )
-		.append(`<li><button type="button" id="${button_id}">${sub.name}</button></li>` );
-            document.getElementById( button_id ).addEventListener(
-		'click', function() { play( sub ); } );
+			if (sub.songs && sub.songs.length > 0) {
+			  let button_id="b"+button_no++;
+              $( `#${this_group}` )
+		    .append(`<li><button type="button" id="${button_id}">${sub.name}</button></li>` );
+              document.getElementById( button_id ).addEventListener(
+			  'click', function() { play( sub ); } );
+			} else {
+				$( `#${this_group}` )
+				.append(`<li>${sub.name}</li>`);
+			}
 	    build( this_group, sub );
         }
     }
