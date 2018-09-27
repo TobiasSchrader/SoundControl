@@ -8,6 +8,7 @@ let gainNode;
 let stopped;
 let currentlyPlaying;
 let volume;
+let isPlaying;
 
 function setup() {
     window.AudioContext = window.AudioContext||window.webkitAudioContext;
@@ -78,17 +79,21 @@ function build(group_name, group) {
 }
 
 function play(group) {
+	if (source) stop();
     console.log(group);
 	currentlyPlaying=group;
     document.getElementById( "info" ).innerText=group.name+" "+group.current_song+" "+group.songs.length;
-    playSound( group.songs[group.current_song].buffer, !group.jingle );
+    playSound( group.songs[group.current_song].buffer);
     group.current_song = ( group.current_song + 1 ) % group.songs.length;
 	
 }
 
-function playSound(buffer, loop) {
-	if (source) stop();
-	stopped=false;
+function playSound(buffer) {
+	console.log("playing: ");
+	console.log(currentlyPlaying);
+	setTimeout(function() {
+			stopped=false;
+			}, 1000);
 	source = context.createBufferSource();
     source.buffer = buffer;						// tell the source which sound to play
     //source.connect(context.destination);       // connect the source to the context's destination (the speakers)
@@ -114,13 +119,16 @@ setVolume = function(fraction) {
 	volume=fraction;
 }
 stop = function() {
+	console.log("stop called");
   if (!source.stop)
     source.stop = source.noteOff;
   source.stop(0);
   stopped=true;
+  //source='';
 };
 
 fadeOut = function(length) {
+	console.log("fadeout");
 	let saveVolume=volume;
 	step=volume/(length*5);
 	let time=0
@@ -136,12 +144,14 @@ fadeOut = function(length) {
 		setVolume(saveVolume);
 		}, length*1000);
 }
-	
 //source.onended = function(event) {
 function loopMusic() {
+	isPlaying=false;
 	console.log("onended called");
 	if(!stopped && !source.jingle) {
 		console.log("looped");
+		if(currentlyPlaying) {
 		play(currentlyPlaying);
+		}
 	}
 }
