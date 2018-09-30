@@ -7,8 +7,7 @@ let button_no=1;
 let gainNode;
 let stopped;
 let currentlyPlaying;
-let volume;
-let isPlaying;
+let volume=0.5;
 
 function setup() {
     window.AudioContext = window.AudioContext||window.webkitAudioContext;
@@ -134,13 +133,15 @@ stop = function() {
 
 fadeOut = function(length) {
 	console.log("fadeout");
+	length=3;
 	let saveVolume=volume;
-	step=volume/(length*5);
+	step=Math.trunc(100*volume/(length*5))/100;
+	console.log(step);
 	let time=0
 	while(time < length) {
 		time+=0.2;
-		console.log(time);
 		setTimeout(function() {
+			console.log(volume-step);
 			setVolume(volume-step);
 			}, time*1000);	
 	}
@@ -151,9 +152,8 @@ fadeOut = function(length) {
 }
 //source.onended = function(event) {
 function loopMusic() {
-	isPlaying=false;
 	console.log("onended called");
-	if(!stopped && !source.jingle) {
+	if(!stopped && !currentlyPlaying.jingle) {
 		console.log("looped");
 		if(currentlyPlaying) {
 		play(currentlyPlaying);
